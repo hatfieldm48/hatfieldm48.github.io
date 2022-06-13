@@ -70,7 +70,7 @@ svg.append('g')
 
 //Read the data
 //d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv", function(data) {
-d3.csv("https://raw.githubusercontent.com/hatfieldm48/nba_3pt_shooting_progression/main/Data/nba_3pt_progressions_dataframe.csv", function(data) {
+d3.csv("./assets/data/nba_3pt_progressions_dataframe.csv", function(data) {
 
     // List of groups (here I have one group per column)
     var allGroup = d3.map(data, function(d){return(d.name)}).keys()
