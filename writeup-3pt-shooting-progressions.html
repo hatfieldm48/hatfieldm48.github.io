@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>3pt Shooting Progressions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="./assets/css/main.css" rel="stylesheet">
+    <link href="./assets/css/bootstrap.css" rel="stylesheet">
+    <link href="./assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        
+    <style>
+
+    /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+
+    body {
+      padding-bottom: 40px;
+      color: #5a5a5a;
+    }
+
+
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      margin-top: 20px;
+      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+    }
+    .navbar-wrapper .navbar {
+
+    }
+
+    /* Remove border and change up box shadow for more contrast */
+    .navbar .navbar-inner {
+      border: 0;
+      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+              box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    }
+
+    /* Downsize the brand/project name a bit */
+    .navbar .brand {
+      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    }
+
+    /* Navbar links: increase padding for taller navbar */
+    .navbar .nav > li > a {
+      padding: 15px 20px;
+    }
+
+    /* Offset the responsive button for proper vertical alignment */
+    .navbar .btn-navbar {
+      margin-top: 10px;
+    }
+
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+
+
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+    @media (max-width: 979px) {
+
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+      }
+      .navbar-inner {
+        border-radius: 0;
+        margin: -20px 0;
+      }
+
+      .featurette {
+        height: auto;
+        padding: 0;
+      }
+      .featurette-image.pull-left,
+      .featurette-image.pull-right {
+        display: block;
+        float: none;
+        max-width: 40%;
+        margin: 0 auto 20px;
+      }
+    }
+
+
+    @media (max-width: 767px) {
+
+      .navbar-inner {
+        margin: -20px;
+      }
+
+      .marketing .span4 + .span4 {
+        margin-top: 40px;
+      }
+
+      .featurette-heading {
+        font-size: 30px;
+      }
+      .featurette .lead {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+    }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="./assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="./assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="./assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="./assets/ico/hatfield-dots-logo.png">
+  </head>
+
+  <body>
+
+    <!-- NAVBAR
+    ================================================== -->
+    <div class="navbar-wrapper">
+      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+      <div class="container">
+
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner">
+            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">Project name</a>
+            <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <!-- Read about Bootstrap dropdowns at https://getbootstrap.com/2.3.2/javascript.html#dropdowns -->
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
+      </div> <!-- /.container -->
+    </div><!-- /.navbar-wrapper -->
+
+    <div class="container" style="padding-top: 6rem;">
+      <div class="row">
+        <p>
+          Sixers season ended in a missed conference finals again, and I had myself wondering where they'd be next year. Could Matisse Thybulle ever become a true 3 and D player.
+        </p>
+      </div>
+      <div class="row">
+        <p>
+          So why not get a view of the progression of every NBA players 3 pt shooting? The data we'd need is well organized for each player on basketball reference: https://www.basketball-reference.com/players/c/curryst01.html
+        </p>
+        <img src="./assets/img/fg3pt_shooting_progressions_basketball_reference_table.png">
+        <p>
+          Let's add some parameters to the data we'd like to gether from this site:
+        </p>
+        <ol>
+          <li>Only players who have started playing in the NBA after 2000</li>
+          <li>Only players who have played in the NBA beyond 2010</li>
+        </ol>
+      </div>
+      <div class="row">
+        <p>
+          The python function below will return every player url, within the date bounds outlined, available from basketball-reference. <span class="collapsible">+ Expand Code</span>
+        </p>
+        <!--<button type="button" class="collapsible"> + Expand Code</button>-->
+        <div class="content">
+          <pre class="prettyprint lang-py"><code>start_year_min = 2000
+end_year_min = 2010
+
+def get_player_hrefs(base_url, alph):
+    """ Returns a list of urls from the given basketball reference base url
+        and the provide character, alph
+    """
+    
+    ## Get the webpage contents
+    r = requests.get(base_url + '/' + alph + '/', verify=False)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    
+    ## Extract the table rows containing player information
+    data_rows = soup.find_all('tr')
+    player_rows = [x for x in data_rows if 'data-stat="player"' in str(x)]
+    
+    player_href_links = [] ## The list to be returned
+    for r in player_rows:
+        cells_th = r.find_all('th')
+        cells_td = r.find_all('td')
+
+        ## Filter by start/end years
+        start_year, end_year = None, None
+        start_year_html = [x for x in cells_td if 'data-stat="year_min"' in str(x)]
+        end_year_html = [x for x in cells_td if 'data-stat="year_max"' in str(x)]
+        if (len(start_year_html)>0):
+            start_year = start_year_html[0].contents[0]
+        if (len(end_year_html)>0):
+            end_year = end_year_html[0].contents[0]
+
+        if start_year and end_year:
+            if int(start_year) < start_year_min:
+                continue
+            if int(end_year) < end_year_min:
+                continue
+
+        ## try to get the href link
+        player_link_results = cells_th[0].find_all('a', href=True)
+        if len(player_link_results) > 0:
+            player_href_links.append(player_link_results[0].get('href'))
+            
+    return player_href_links
+          </code></pre>
+        </div>
+        <p>
+          And this next python function will take a single player's url, and return a dictionary of th 3pt shooting statistics we care about. <span class="collapsible">+ Expand Code</span>
+        </p>
+        <!--<button type="button" class="collapsible"> + Expand Code</button>-->
+        <div class="content">
+          <pre class="prettyprint lang-py"><code>def get_3pt_shooting_data(player_url):
+    """ Returns a dictionary of the player's 3pt shooting statistics
+    """
+    
+    r = requests.get(player_url, verify=False)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    
+    ## Get the player name
+    meta_section = soup.find_all('div', {'id': 'meta'})
+    if len(meta_section) == 0:
+        return
+    player_name = meta_section[0].find_all('span')[0].contents[0]
+    
+    totals_table_list = soup.find_all('table', {'id': 'totals'})
+    ## If empty, then return empty
+    if len(totals_table_list) == 0:
+        return
+    
+    ## Get the rows of the table
+    totals_table = totals_table_list[0]
+    rows = totals_table.find_all('tr')
+    
+    ## For each row, get the year, fg3, fg3a, and fg3_pct
+    row_data = []
+    for r in rows:
+        tds = r.find_all('td')
+        if (len(tds)==0):
+            continue
+            
+        if (len([x for x in tds if 'data-stat="age"' in str(x)][0].contents)==0):
+            continue
+            
+        age = [x for x in tds if 'data-stat="age"' in str(x)][0].contents[0]
+        fg3 = [x for x in tds if 'data-stat="fg3"' in str(x)][0].contents[0]
+        fg3a = [x for x in tds if 'data-stat="fg3a"' in str(x)][0].contents[0]
+        if len([x for x in tds if 'data-stat="fg3_pct"' in str(x)][0].contents)==0:
+            fg3_pct = '0'
+        else:
+            fg3_pct = [x for x in tds if 'data-stat="fg3_pct"' in str(x)][0].contents[0]
+        row_dict = {'age': age, 'fg3': fg3, 'fg3a': fg3a, 'fg3_pct': fg3_pct}
+        row_data.append(row_dict)
+    
+    return_data = {
+        'name': player_name,
+        'url': player_url,
+        'row_data': row_data,
+    }
+    return return_data
+          </code></pre>
+        </div>
+        <p>
+          And lastly, our driver code to run both of the functions iteratively. After running this, the <code>all_player_data</code> variable will be a list of dictionaries of all the data we need. <span class="collapsible">+ Expand Code</span>
+        </p>
+        <!--<button type="button" class="collapsible"> + Expand Code</button>-->
+        <div class="content">
+          <pre class="prettyprint lang-py"><code>base_url = 'https://www.basketball-reference.com'
+all_player_data = []
+alphs = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+for alph in alphs:
+    
+    player_href_links = get_player_hrefs('https://www.basketball-reference.com/players', alph)
+    
+    for player_url in player_href_links:
+        print (alph, player_url)
+        try:
+            player_data = get_3pt_shooting_data(base_url + player_url)
+            if ({'name','url','row_data'}==(set(player_data.keys()))):
+                all_player_data.append(player_data)
+        except Exception as e:
+            print ('ERROR:', player_url)
+            print (e)
+          </code></pre>
+        </div>
+        <p>
+          After checking to see the data was parsed correctly, we'll save it all to json file for easier access. <span class="collapsible">+ Expand Code</span>
+        </p>
+        <!--<button type="button" class="collapsible"> + Expand Code</button>-->
+        <div class="content">
+          <pre class="prettyprint lang-py"><code>## Need to go through and covnert bs4 type objects to strings
+for x in all_player_data:
+    x['name'] = str(x['name'])
+    x['url'] = str(x['url'])
+    for row in x['row_data']:
+        row['age'] = str(row['age'])
+        row['fg3'] = str(row['fg3'])
+        row['fg3a'] = str(row['fg3a'])
+        row['fg3_pct'] = str(row['fg3_pct'])
+
+import json
+with open('../Data/nba_3pt_progressions_all_players.json', 'w') as f:
+    json.dump(all_player_data, f)
+    f.close()
+          </code></pre>
+        </div>
+      </div>
+      <div class="row">
+        <p>
+          We'll load the data back into a pandas dataframe for ease of use, and while loading that, we'll also add in a filter to sort out seasons where a player didn't attempt enough 3 pointers to be worth analysiing (threshold set at 25 in this code block). This code also includes a check to account for instances where a player was traded in the middle of the season, as basketball-reference includes as "Total" row, and a row for each of the two teams, all for the same season. The only one needed for this analysis is the total row. <span class="collapsible">+ Expand Code</span>
+        </p>
+        <!--<button type="button" class="collapsible"> + Expand Code</button>-->
+        <div class="content">
+          <pre class="prettyprint lang-py"><code>## Read the data back in
+file_3pt_shooting = '../Data/nba_3pt_progressions_all_players.json'
+with open(file_3pt_shooting, 'r') as f:
+    data_3pt_shooting = json.load(f)
+    f.close()
+
+## Need to create a dataframe with the following columns
+##  name     - will be the 'units' value for sns.lineplot
+##  season   - will be the x axis
+##  fg3
+##  fg3a
+##  fg3_pct  - will be the y axis
+
+records_3pt_shooting = []
+for row in data_3pt_shooting:
+    name = row['name']
+    min_age = min([int(x['age']) for x in row['row_data']])
+    prev_age = 0
+    for season in row['row_data']:
+        year = int(season['age']) - min_age
+        fg3 = float(season['fg3'].replace('<strong>','').replace('</strong>',''))
+        fg3a = float(season['fg3a'].replace('<strong>','').replace('</strong>',''))
+        fg3_pct = float(season['fg3_pct'].replace('<strong>','').replace('</strong>',''))
+        
+        ## check for minimum attempts
+        ##  and consolidate to only the "TOT" column if multiple teams in 1 seasons
+        if fg3a > 25 and prev_age!=season['age']:
+            records_3pt_shooting.append({
+                'name': name,
+                'year': year,
+                'fg3': fg3,
+                'fg3a': fg3a,
+                'fg3_pct': fg3_pct,
+            })
+        prev_age = season['age']
+
+df_3pt_shooting = pd.DataFrame(records_3pt_shooting)
+          </code></pre>
+        </div>
+        <p>
+          Let's plot the full dataset: <span class="collapsible">+ Expand Code</span>
+        </p>
+        <!--<button type="button" class="collapsible"> + Expand Code</button>-->
+        <div class="content">
+          <pre class="prettyprint lang-py"><code>import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set(rc = {'figure.figsize':(15, 8)})
+sns.lineplot(
+    data=df_3pt_shooting,
+    x="year", y="fg3_pct", units="name",
+    estimator=None, lw=1, alpha=0.3
+)
+          </code></pre>
+        </div>
+        <img src="./assets/img/fg3pt_shooting_progressions_all_original.png">
+      </div>
+      <div class="row">
+        <p>
+          One caveat to add at this point is that the current visualization and dataset includes players with just 1 year, which are just non-visable dots on this chart. And you can also see that players might not have their first instance of 25+ 3pt field goal attempts in the first season, and may also skip seasons. For the players with just one year, we'll just remove those from the dataset so that those player names aren't unecessarily included down the line. As for the players whose progression plots start after that first year, we'll write a function to re-base those to be their first year, and will be able to toggle between both for plotting purposes.
+        </p>
+        <p>
+          But first, let's build in some functionality so that we can view a specific player for (1) validating that this is working correctly, and (2) aiding some analysis later on. 
+        </p>
+        <div id="interactive-3pt-plot"></div>
+      </div>
+      <div>
+        <p>
+          Now lets start asking some questions
+        </p>
+        <ol>
+          <li>Just re-organize this a bit. Reset every player to base year zero</li>
+          <li>Split into players with +/0/- linear regressions</li>
+          <li>How many in each bucket?</li>
+          <li>Given a player (Matisse), who are all the comparable players?</li>
+          <li>players with average fg% within +/-x of first N seasons</li>
+          <li>and what are the trends of those players?</li>
+        </ol>
+      </div>
+   </div>
+
+        <!-- javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!--<script src="./assets/js/jquery.js"></script>-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    
+    <script src="./assets/js/bootstrap-transition.js"></script>
+    <script src="./assets/js/bootstrap-alert.js"></script>
+    <script src="./assets/js/bootstrap-modal.js"></script>
+    <script src="./assets/js/bootstrap-dropdown.js"></script>
+    <script src="./assets/js/bootstrap-scrollspy.js"></script>
+    <script src="./assets/js/bootstrap-tab.js"></script>
+    <script src="./assets/js/bootstrap-tooltip.js"></script>
+    <script src="./assets/js/bootstrap-popover.js"></script>
+    <script src="./assets/js/bootstrap-button.js"></script>
+    <script src="./assets/js/bootstrap-collapse.js"></script>
+    <script src="./assets/js/bootstrap-carousel.js"></script>
+    <script src="./assets/js/bootstrap-typeahead.js"></script>
+
+    <!-- Load the interactive 3pt Progression Plot -->
+    <script> 
+      $(function(){
+        $("#interactive-3pt-plot").load("interactive-3pt-shooting-progressions.html"); 
+      });
+    </script> 
+
+    <script>
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          //var content = this.nextElementSibling;
+          var content = this.parentElement.nextElementSibling;
+          if (content.style.display === "block") {
+            this.innerHTML = ' + Expand Code';
+            content.style.display = "none";
+          } else {
+            //this.innerHTML = ' — Collapse Code';
+            this.innerHTML = ' − Collapse Code';
+            content.style.display = "block";
+          }
+        });
+      }
+    </script>
+
+  </body>
+</html>
