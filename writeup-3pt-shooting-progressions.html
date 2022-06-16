@@ -637,7 +637,7 @@ sns.lineplot(
             .attr("class", "y label")
             .attr("text-anchor", "end")
             .attr("y", -45)
-            .attr("x", -(full_height / 4))
+            .attr("x", -(full_height / 4) + margin.bottom)
             .attr("dy", ".75em")
             .attr("transform", "rotate(-90)")
             .text("3pt FG Percentage")
