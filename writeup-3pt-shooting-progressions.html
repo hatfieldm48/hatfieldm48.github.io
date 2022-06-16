@@ -474,10 +474,10 @@ sns.lineplot(
 
         <!--<div id="interactive-3pt-plot"></div>-->
         <!-- Initialize an autofill dropdown -->
+        <div class="chart-title" style="display: flex; justify-content: center;">NBA 3pt FG Percentage Progressions</div>
         <div style="display: flex; justify-content: center;">
-          <input id="player-names-input" list="player-names" placeholder="Start typing..." style="width: 175px;">
+          <input id="player-names-input" list="player-names" placeholder="Start typing..." style="width: 300px;">
           <datalist id="player-names"></datalist>
-          <span class="chart-title" style="margin-left: 10px;">NBA 3pt FG Percentage Progressions</span>
         </div>
 
         <!-- Create a div where the graph will take place -->
@@ -554,7 +554,9 @@ sns.lineplot(
       console.log("Screen Width: " + screen.width);
 
       //const full_width = 800;
-      if (screen.width > 800) {
+      if (screen.width > 1170) {
+        full_width = 1170;
+      } else if (screen.width > 800) {
         full_width = 800;
       } else {
         full_width = screen.width;
