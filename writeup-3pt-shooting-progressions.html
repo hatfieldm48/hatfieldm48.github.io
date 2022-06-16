@@ -548,8 +548,15 @@ sns.lineplot(
       // set the dimensions and margins of the graph
       console.log("Screen Width: " + screen.width);
 
-      const full_width = 800;
-      const full_height = 400;
+      //const full_width = 800;
+      if (screen.width > 800) {
+        full_width = 800;
+      } else {
+        full_width = screen.width;
+      }
+      //const full_height = 400;
+      const full_height = full_width / 2;
+
       var margin = {top: 10, right: 30, bottom: 30, left: 60},
           width = full_width - margin.left - margin.right,
           height = full_height - margin.top - margin.bottom;
@@ -564,9 +571,13 @@ sns.lineplot(
                 "translate(" + margin.left + "," + margin.top + ")");
 
       // create the background color for the chart
-      svg.append("rect")
+      /*svg.append("rect")
           .attr("width", "710")
           .attr("height", "360")
+          .attr("fill", "#eaeaf2");*/
+      svg.append("rect")
+          .attr("width", width.toString())
+          .attr("height", height.toString())
           .attr("fill", "#eaeaf2");
 
       //Read the data
