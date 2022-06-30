@@ -534,7 +534,7 @@ df_3pt_shooting['year_zero_fg3_pct'] = df_3pt_shooting.apply(lambda x: calc_zero
           </code></pre>
         </div>
         <p>
-          We've got a list now containing each players name and their accompanying linear regression coefficinet. Let's use that to group the pool of players into those that (1) improved their 3 point shooting, (2) remained about the same, and (3) got worse. The resulting plot of that is below, where the improvement progressions are in green, constant in gray, and the declines in red. <span class="collapsible">+ Expand Code</span>
+          We've got a list now containing each players name and their accompanying linear regression coefficinet. Let's use that to group the pool of players into those that (1) improved their 3 point shooting, (2) remained about the same, and (3) got worse. The resulting plot of that is below, where the improvement progressions are in green, constant in gray, and the declines in red. <span class="collapsible">+ Expand Code</span>  At these parameters, we end up with 180 players who improved their 3pt shooting over their career, 164 who got worse, and 404 who remained about the same throughout.
         </p>
         <div class="content">
           <pre class="prettyprint lang-py"><code>## Split Regressions into improvement, meh, and decline
@@ -559,6 +559,7 @@ Out: Improve: 180
      Decline: 164
           </code></pre>
         </div>
+        <section id="intro"></section>
         <section id="scrolly-regressiongroups">
           <figure>
             <img id="scrolly-plot-reggroups" src="./assets/img/fg3pt_shooting_progressions_buckets.png">
@@ -583,15 +584,133 @@ Out: Improve: 180
             </div>
           </article>
         </section>
+        <section id="outro"></section>
+      </div>
+      <div class="row">
+        <p>
+          Regressions aside, what if we wanted to figure out which players in this dataset have the most similar shooting progression to someone we're interested in project. This all started out with wondering what in the world Matisse Thybulle can bring to the table, so let's just go ahead and cut right to him.
+        </p>
+        <p>
+          Over Matisse Thybulle's first 3 years, he's shot 35.7%, 30.1%, and 31.3% on 3pt FGs, with a career average of 32.4. And we'd like to find players with similar shooting in their first 3 years, and be able to understand how their 3pt shooting evolved over the rest of their career. We'll use two different metrics for assessing similarity of shooting datasets. The first, being the difference of career average 3pt fg percentage. The second the minimum total residual between datasets. <span class="collapsible">+ Expand Code</span>
+        </p>
+        <div class="content">
+          <pre class="prettyprint lang-py"><code>## Compare two datasets - Mean Residuals
+def get_area_between_curves(curve_1, curve_2):
+    """ Each curve is a list of (x,y) coordinates
+          and is sorted ascending by the x value
+    """  
+    
+    area = 0
+    i = 0
+    j = 0
+    while i < len(curve_1) and j < len(curve_2):
+        if curve_1[i][0] > curve_2[j][0]:
+            j += 1
+        elif curve_1[i][0] > curve_2[j][0]:
+            i +=1
+        else:
+            area += abs(curve_1[i][1] - curve_2[j][1])
+            i += 1
+            j += 1
+            
+    return area
+
+## Compare two datasets - Average
+def get_difference_btwn_avg_fgpct(df_1, df_2):
+    """ Each dataframe has the shooting data
+            fg3  : made 3pts
+            fg3a : attempted 3pts
+        Add up the data for each relevant year and compute career average
+        Return the difference of players
+    """
+    
+    fg_made_1 = list(df_1['fg3'])
+    fg_attempted_1 = list(df_1['fg3a'])
+    fg_made_2 = list(df_2['fg3'])
+    fg_attempted_2 = list(df_2['fg3a'])
+    
+    career_avg_1 = sum(fg_made_1) / sum(fg_attempted_1)
+    
+    if len(fg_made_2) > len(fg_made_1):
+        career_avg_2 = sum(fg_made_2[:len(fg_made_1)]) / sum(fg_attempted_2[:len(fg_attempted_1)])
+        #print (fg_made_2[:len(fg_made_1)])
+        #print (fg_made_1)
+    else:
+        career_avg_2 = sum(fg_made_2) / sum(fg_attempted_2)
+    
+    return abs(career_avg_2 - career_avg_1)
+          </code></pre>
+        </div>
+        <p>
+          We'll use those two function to create a metric of similarity for every other player with which we can compare to Matisse Thybulle's 3pt shooting. This code below gathers those two metrics for all other players and saves it as a tuple (player name, mean residuals of 3pt fg pct, difference in avg 3pt fg pct) in a list of all the players. It then plots the top 25 most similar players by both metrics. <span class="collapsible">+ Expand Code</span>
+        </p>
+        <div class="content">
+          <pre class="prettyprint lang-py"><code>## Find the N most and least similar shooting progressions to a given player
+n_comps = 25
+
+# Set the player name
+player_comp = 'Matisse Thybulle' #random.choice(list(all_name_occurrences))
+
+# Get that player's data as a list of tuples
+df_player = df_3pt_shooting[df_3pt_shooting['name']==player_comp]
+player_curve = list(zip(list(df_player['year_zero']),list(df_player['fg3_pct'])))
+
+print (player_comp)
+print (player_curve)
+similarity_scores = []
+
+for pn in all_name_occurrences:
+    if pn==player_comp:
+        continue
+    else:
+        # Get test player's data as a list of tuples
+        df_test = df_3pt_shooting[df_3pt_shooting['name']==pn]
+        test_curve = list(zip(list(df_test['year_zero']),list(df_test['fg3_pct'])))
+        
+        # Only if test curve is longer than player curve
+        #if len(test_curve) > len(player_curve):
+        if len(test_curve) > (len(player_curve)+3):
+            # Calculate area between datasets
+            area_between = get_area_between_curves(player_curve, test_curve)
+            
+            # Calculate the difference in avg 3pt fg%
+            avg_pct_diff = get_difference_btwn_avg_fgpct(df_player, df_test)
+            
+            # Add to records
+            similarity_scores.append((pn, area_between, avg_pct_diff))
+
+similarity_scores = sorted(similarity_scores, key=lambda x: x[1])
+for i in range(n_comps):
+    fig = sns.lineplot(
+        data=df_3pt_shooting[df_3pt_shooting['name']==similarity_scores[i][0]],
+        x='year_zero', y="fg3_pct", units="name",
+        estimator=None, lw=1, alpha=0.5, color='blue'
+    )
+    
+similarity_scores = sorted(similarity_scores, key=lambda x: x[2])
+for i in range(n_comps):
+    sns.lineplot(
+        data=df_3pt_shooting[df_3pt_shooting['name']==similarity_scores[i][0]],
+        x='year_zero', y="fg3_pct", units="name",
+        estimator=None, lw=1, alpha=0.5, color='red'
+    )
+    
+sns.lineplot(
+    data=df_3pt_shooting[df_3pt_shooting['name']==player_comp],
+    x='year_zero', y="fg3_pct", units="name",
+    estimator=None, lw=3, alpha=1, color='black'
+)
+    
+fig.set_ylim(0, 0.6)
+          </code></pre>
+        </div>
+        <img id="scrolly-plot-reggroups" src="./assets/img/fg3pt_shooting_progressions_matisse_tybulle_similarity.png">
       </div>
       <div>
-        <p>
-          Now lets start asking some follow up questions
-        </p>
         <ol>
           <li>[x] Just re-organize this a bit. Reset every player to base year zero</li>
-          <li>Split into players with +/0/- linear regressions</li>
-          <li>How many in each bucket?</li>
+          <li>[x] Split into players with +/0/- linear regressions</li>
+          <li>[x] ow many in each bucket?</li>
           <li>Given a player (Matisse), who are all the comparable players?</li>
           <li>players with average fg% within +/-x of first N seasons</li>
           <li>and what are the trends of those players?</li>
@@ -829,7 +948,9 @@ Out: Improve: 180
         var stepH = Math.floor(window.innerHeight * 0.75);
         step.style("height", stepH + "px");
 
-        var figureHeight = window.innerHeight / 2;
+        //console.log(document.getElementById('scrolly-plot-reggroups').clientHeight);
+        var figureHeight = Math.max(window.innerHeight / 2, document.getElementById('scrolly-plot-reggroups').clientHeight);
+        //var figureHeight = window.innerHeight / 2;
         var figureMarginTop = (window.innerHeight - figureHeight) / 2;
 
         figure
@@ -842,7 +963,6 @@ Out: Improve: 180
 
       // scrollama event handlers
       function handleStepEnter(response) {
-        console.log(response);
         // response = { element, direction, index }
 
         // add color to current step only
